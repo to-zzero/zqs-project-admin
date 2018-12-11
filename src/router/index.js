@@ -35,7 +35,7 @@ export const constantRouterMap = [
       title: '首页'
     },
     children: [{
-      path: '/dashboard',
+      path: 'dashboard',
       component: () => import('@/views/dashboard/index')
     }]
   },
@@ -48,13 +48,13 @@ export const constantRouterMap = [
     meta: { title: '例子', icon: 'example' },
     children: [
       {
-        path: '/example/table',
+        path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
         meta: { title: '表格', icon: 'table' }
       },
       {
-        path: '/example/tree',
+        path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: '树形结构', icon: 'tree' }
@@ -67,7 +67,7 @@ export const constantRouterMap = [
     component: Layout,
     children: [
       {
-        path: '/example/index',
+        path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: '表单', icon: 'form' }
