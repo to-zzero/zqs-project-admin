@@ -2,7 +2,7 @@
 
 > A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
 
-**Live demo:** http://panjiachen.github.io/vue-admin-template
+<!-- **Live demo:** http://panjiachen.github.io/vue-admin-template
 
 [中文文档](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)
 
@@ -85,4 +85,8 @@ Modern browsers and Internet Explorer 10+.
 
 [MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
 
-Copyright (c) 2017-present PanJiaChen
+Copyright (c) 2017-present PanJiaChen -->
+
+# 随便写写
+
+![''](http://www.zuiren-z.com/static/bg/dark.jpg)
