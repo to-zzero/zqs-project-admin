@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/login'
+import { loginAPI, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -6,12 +6,21 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    userInfo: {
+      name: '',
+      pwd: '',
+      country: '',
+      phone: ''
+    }
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
+    },
+    SET_USERINFO(state, data = {}) {
+      state.userInfo = Object.assign(state.userInfo, data)
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -29,10 +38,10 @@ const user = {
     Login({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          const data = response.data
-          setToken(data.token)
-          commit('SET_TOKEN', data.token)
+        loginAPI(username, userInfo.pwd).then(res => {
+          setToken(res.token)
+          commit('SET_TOKEN', res.token)
+          commit('SET_USERINFO', res)
           resolve()
         }).catch(error => {
           reject(error)

@@ -1,12 +1,23 @@
 import request from '@/utils/request'
 
-export function login(username, password) {
+export function loginAPI(username, pwd) {
   return request({
     url: '/user/login',
     method: 'post',
     data: {
       username,
-      password
+      pwd
+    }
+  })
+}
+
+export function addUserAPI({ username, pwd }) {
+  return request({
+    url: '/user/addUser',
+    method: 'post',
+    data: {
+      username,
+      pwd
     }
   })
 }
