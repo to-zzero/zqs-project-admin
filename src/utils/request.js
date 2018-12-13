@@ -55,12 +55,14 @@ service.interceptors.response.use(
         })
       }
       return Promise.reject('error')
-    } else {
+    } else if (res.message) {
       Message({
         message: res.message,
         type: 'success',
         duration: 3 * 1000
       })
+      return response.data
+    } else {
       return response.data
     }
   },

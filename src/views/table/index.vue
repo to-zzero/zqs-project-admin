@@ -1,33 +1,32 @@
 <template>
   <div class="app-container">
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row>
+    <el-button @click="fetchData">请求</el-button>
+    <my-table
+      :show-page="true"
+      :loading="listLoading"
+      :data-list="list"
+      @request="fetchData">
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column label="name">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="country" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <span>{{ scope.row.country }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column label="phone" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          {{ scope.row.phone }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
+      <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
@@ -37,13 +36,13 @@
           <i class="el-icon-time"/>
           <span>{{ scope.row.display_time }}</span>
         </template>
-      </el-table-column>
-    </el-table>
+      </el-table-column> -->
+    </my-table>
   </div>
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { queryUserListAPI } from '@/api/login'
 
 export default {
   filters: {
@@ -58,18 +57,26 @@ export default {
   },
   data() {
     return {
-      list: null,
-      listLoading: true
+      list: {
+        count: 0,
+        items: []
+      },
+      listLoading: true,
+      params: {
+        page: 1,
+        size: 2
+      }
     }
   },
   created() {
-    // this.fetchData()
+    this.fetchData()
   },
   methods: {
-    fetchData() {
+    fetchData(data) {
       this.listLoading = true
-      getList(this.listQuery).then(response => {
-        this.list = response.data.items
+      this.params = Object.assign({}, this.params, data || {})
+      queryUserListAPI(this.params).then(res => {
+        this.list = res
         this.listLoading = false
       })
     }

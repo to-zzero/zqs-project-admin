@@ -22,11 +22,14 @@ export function addUserAPI({ username, pwd }) {
   })
 }
 
-export function getInfo(token) {
+export function queryUserListAPI({ page, size }) {
   return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+    url: '/user/query_users',
+    method: 'post',
+    data: {
+      page,
+      size
+    }
   })
 }
 

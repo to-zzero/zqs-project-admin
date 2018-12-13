@@ -76,3 +76,29 @@ a:hover {
 .app-container {
   padding: 20px;
 }
+
+.flex-box {
+  &:not(.inline) {
+    display: flex;
+  }
+  &.inline {
+    display: inline-flex;
+  }
+  align-items: center;
+
+  .space-center {
+    justify-content: center;
+  }
+  .space-left {
+    justify-content: flex-start;
+  }
+  .space-right {
+    justify-content: flex-end;
+  }
+  .space-between {
+    justify-content: space-between;
+  }
+  .space-around {
+    justify-content: space-around;
+  }
+}
