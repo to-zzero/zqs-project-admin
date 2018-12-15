@@ -1,6 +1,6 @@
 import { loginAPI, logoutAPI, getUserInfoAPI } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { setStorage, getStorage } from '@/utils'
+import { setStorage, getStorage, deleteStorage } from '@/utils'
 import { Message } from 'element-ui'
 
 const userInfoStorage = getStorage('userInfo') || {}
@@ -83,6 +83,7 @@ const user = {
             key: 'isLogin',
             val: true
           })
+          deleteStorage('userInfo')
           removeToken()
           resolve()
         }).catch(error => {
@@ -95,8 +96,8 @@ const user = {
     FedLogOut({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
+        deleteStorage('userInfo')
         removeToken()
-        setStorage('userInfo', {})
         resolve()
       })
     },
@@ -104,6 +105,8 @@ const user = {
     initUser({ commit, state, dispatch }) {
       if (state.isLogin && !state.userInfo.name) {
         dispatch('FedLogOut').then(() => {
+          deleteStorage('userInfo')
+          removeToken()
           Message({
             message: '非法操作，请重新登录',
             type: 'error',

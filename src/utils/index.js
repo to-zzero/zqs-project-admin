@@ -102,3 +102,10 @@ export const getStorage = function(key) {
     console.log(err)
   }
 }
+export const deleteStorage = function(key) {
+  try {
+    localStorage.removeItem(key)
+  } catch (err) {
+    console.log(err)
+  }
+}
