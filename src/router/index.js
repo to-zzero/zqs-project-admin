@@ -22,8 +22,8 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => (resolve) => require(['@/views/login/index'], resolve), hidden: true },
-  { path: '/404', component: () => (resolve) => require(['@/views/404'], resolve), hidden: true },
+  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  { path: '/404', component: () => import('@/views/404'), hidden: true },
 
   {
     path: '/',
@@ -31,12 +31,9 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
-    meta: {
-      title: '首页'
-    },
     children: [{
       path: 'dashboard',
-      component: (resolve) => require(['@/views/dashboard/index'], resolve)
+      component: () => import('@/views/dashboard/index')
     }]
   },
 
@@ -45,19 +42,19 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: '例子', icon: 'example' },
+    meta: { title: 'Example', icon: 'example' },
     children: [
       {
         path: 'table',
         name: 'Table',
-        component: (resolve) => require(['@/views/table/index'], resolve),
-        meta: { title: '表格', icon: 'table' }
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
-        component: (resolve) => require(['@/views/tree/index'], resolve),
-        meta: { title: '树形结构', icon: 'tree' }
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree', icon: 'tree' }
       }
     ]
   },
@@ -69,8 +66,8 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'Form',
-        component: (resolve) => require(['@/views/form/index'], resolve),
-        meta: { title: '表单', icon: 'form' }
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Form', icon: 'form' }
       }
     ]
   },
@@ -79,7 +76,7 @@ export const constantRouterMap = [
 ]
 
 export default new Router({
-  mode: 'history', // 后端支持可开
+  // mode: 'history', //后端支持可开
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })

@@ -89,7 +89,7 @@ Vue.use(BreadcrumbItem)
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-
+console.log(router, store)
 new Vue({
   el: '#app',
   router,

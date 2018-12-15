@@ -72,3 +72,33 @@ export function formatTime(time, option) {
 export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
+
+export const clone = function(data) {
+  return JSON.parse(JSON.stringify(data))
+}
+
+export const setStorage = function(key, value) {
+  try {
+    if (typeof value === 'string') {
+      localStorage.setItem(key, value)
+    } else {
+      const data = getStorage(key) || {}
+      localStorage.setItem(key, JSON.stringify(Object.assign({ v: new Date().getTime() }, data, clone(value))))
+    }
+  } catch (err) {
+    console.log(err)
+  }
+}
+export const getStorage = function(key) {
+  try {
+    let value
+    try {
+      value = JSON.parse(localStorage.getItem(key))
+    } catch (err) {
+      value = localStorage.getItem(key)
+    }
+    return value
+  } catch (err) {
+    console.log(err)
+  }
+}

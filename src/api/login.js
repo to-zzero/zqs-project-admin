@@ -22,6 +22,16 @@ export function addUserAPI({ username, pwd }) {
   })
 }
 
+export function deleteUserAPI(id) {
+  return request({
+    url: '/user/delete_user',
+    method: 'post',
+    data: {
+      id
+    }
+  })
+}
+
 export function queryUserListAPI({ page, size }) {
   return request({
     url: '/user/query_users',
@@ -33,9 +43,19 @@ export function queryUserListAPI({ page, size }) {
   })
 }
 
-export function logout() {
+export function logoutAPI() {
   return request({
-    url: '/user/logout',
+    url: '/user/login_out',
     method: 'post'
+  })
+}
+
+export function getUserInfoAPI(username) {
+  return request({
+    url: '/user/get_user_info',
+    method: 'post',
+    data: {
+      username
+    }
   })
 }

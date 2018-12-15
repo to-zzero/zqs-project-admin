@@ -26,6 +26,11 @@
           {{ scope.row.phone }}
         </template>
       </el-table-column>
+      <el-table-column label="操作" width="110" align="right">
+        <template slot-scope="scope">
+          <el-button type="primary" @click="deleteUser(scope.row.id)">删除</el-button>
+        </template>
+      </el-table-column>
       <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
@@ -42,7 +47,7 @@
 </template>
 
 <script>
-import { queryUserListAPI } from '@/api/login'
+import { queryUserListAPI, deleteUserAPI } from '@/api/login'
 
 export default {
   filters: {
@@ -78,6 +83,11 @@ export default {
       queryUserListAPI(this.params).then(res => {
         this.list = res
         this.listLoading = false
+      })
+    },
+    deleteUser(id) {
+      deleteUserAPI(id).then(res => {
+        this.fetchData()
       })
     }
   }

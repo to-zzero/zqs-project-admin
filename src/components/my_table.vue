@@ -14,7 +14,7 @@
       v-if="showPage"
       :class="`flex-box space-${pageAlign}`">
       <el-pagination
-        :current-page="1"
+        :current-page="currentPage || 1"
         :page-sizes="pageSizeS"
         :page-size="size"
         :layout="pageLayout"
@@ -53,7 +53,20 @@ export default {
   },
   data() {
     return {
-      size: this.pageSizeS[0]
+      size: this.pageSizeS[0],
+      currentPage: 1
+    }
+  },
+  computed: {
+    list() {
+      return this.showPage ? this.dataList.items : this.dataList
+    }
+  },
+  watch: {
+    'list.length'(len) {
+      if (this.showPage && !len && this.currentPage !== 1) {
+        this.handleCurrentChange(this.currentPage - 1)
+      }
     }
   },
   methods: {
@@ -62,6 +75,7 @@ export default {
       this.$emit('request', { size, page: 1 })
     },
     handleCurrentChange(page) {
+      this.currentPage = page
       this.$emit('request', { page })
     }
   }
