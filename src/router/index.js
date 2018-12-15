@@ -22,8 +22,8 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+  { path: '/login', component: () => (resolve) => require(['@/views/login/index'], resolve), hidden: true },
+  { path: '/404', component: () => (resolve) => require(['@/views/404'], resolve), hidden: true },
 
   {
     path: '/',
@@ -36,7 +36,7 @@ export const constantRouterMap = [
     },
     children: [{
       path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      component: (resolve) => require(['@/views/dashboard/index'], resolve)
     }]
   },
 
@@ -50,13 +50,13 @@ export const constantRouterMap = [
       {
         path: 'table',
         name: 'Table',
-        component: () => import('@/views/table/index'),
+        component: (resolve) => require(['@/views/table/index'], resolve),
         meta: { title: '表格', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        component: (resolve) => require(['@/views/tree/index'], resolve),
         meta: { title: '树形结构', icon: 'tree' }
       }
     ]
@@ -69,7 +69,7 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'Form',
-        component: () => import('@/views/form/index'),
+        component: (resolve) => require(['@/views/form/index'], resolve),
         meta: { title: '表单', icon: 'form' }
       }
     ]
